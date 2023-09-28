@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitmqConfig {
 
     @Bean
-    public ObjectMapper objectMapper(){
+    public ObjectMapper objectMapper() {
         return JsonMapper.builder().findAndAddModules().build();
     }
 }
