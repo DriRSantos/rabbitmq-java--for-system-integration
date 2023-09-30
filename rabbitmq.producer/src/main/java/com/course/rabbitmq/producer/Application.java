@@ -3,8 +3,7 @@ package com.course.rabbitmq.producer;
 import com.course.rabbitmq.producer.entity.Furniture;
 import com.course.rabbitmq.producer.entity.Picture;
 import com.course.rabbitmq.producer.producer.FurnitureProducer;
-import com.course.rabbitmq.producer.producer.PictureProducer;
-import com.course.rabbitmq.producer.producer.PictureProducer2;
+import com.course.rabbitmq.producer.producer.MyPictureProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,10 +17,10 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Application implements CommandLineRunner {
 
     @Autowired
-    private FurnitureProducer furnitureProducer;
+    private MyPictureProducer myPictureProducer;
 
-    private List<String> colors = List.of("white", "red", "green");
-    private List<String> materials  = List.of("wood", "plastic", "steel");
+    private final List<String> sources = List.of("mobile", "web");
+    private final List<String> types = List.of("jpg", "png", "svg");
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -29,14 +28,14 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        for (int i = 0; i < 10; i++) {
-            Furniture furniture = new Furniture();
-            furniture.setName("Furniture" + i);
-            furniture.setColor(colors.get(i % colors.size()));
-            furniture.setMaterial(materials.get(i % materials.size()));
-            furniture.setPrice(i);
+        for(int i=0; i<1; i++){
+            var picture = new Picture();
+            picture.setName("Picture " + i);
+            picture.setSize(ThreadLocalRandom.current().nextLong(9000, 10000));
+            picture.setSource(sources.get(i % sources.size()));
+            picture.setType(types.get(i % types.size()));
 
-            furnitureProducer.sendMessage(furniture);
+            myPictureProducer.sendMessage(picture);
         }
     }
 //    @Override
