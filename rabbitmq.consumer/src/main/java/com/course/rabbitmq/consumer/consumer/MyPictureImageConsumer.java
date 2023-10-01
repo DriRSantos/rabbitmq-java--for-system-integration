@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
-@Service
+//@Service
 public class MyPictureImageConsumer {
 
     private static final Logger log = LoggerFactory.getLogger(MyPictureImageConsumer.class);

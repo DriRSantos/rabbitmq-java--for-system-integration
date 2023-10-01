@@ -7,8 +7,8 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//@Service
-public class MyPictureProducer {
+@Service
+public class RetryPictureProducer {
 
     @Autowired
     RabbitTemplate rabbitTemplate;
@@ -18,6 +18,6 @@ public class MyPictureProducer {
 
     public void sendMessage(Picture picture) throws JsonProcessingException {
         var json = objectMapper.writeValueAsString(picture);
-        rabbitTemplate.convertAndSend("x.mypicture", picture.getType(), json);
+        rabbitTemplate.convertAndSend("x.guideline.work", picture.getType(), json);
     }
 }
