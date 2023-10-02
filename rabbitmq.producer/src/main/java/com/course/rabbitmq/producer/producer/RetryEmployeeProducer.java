@@ -7,8 +7,8 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//@Service
-public class HumanResourceProducer {
+@Service
+public class RetryEmployeeProducer {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
@@ -18,6 +18,6 @@ public class HumanResourceProducer {
 
     public void sendMessage(Employee data) throws JsonProcessingException {
         var json = objectMapper.writeValueAsString(data);
-        rabbitTemplate.convertAndSend("x.hr", "", json);
+        rabbitTemplate.convertAndSend("x.guideline2.work", "", json);
     }
 }
