@@ -8,17 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 @SpringBootApplication
-//@EnableScheduling
+@EnableScheduling
 public class Application implements CommandLineRunner {
 
-    @Autowired
-    private RetryEmployeeProducer retryEmployeeProducer;
+//    @Autowired
+//    private RetryEmployeeProducer retryEmployeeProducer;
 
 //    private final List<String> sources = List.of("mobile", "web");
 //    private final List<String> types = List.of("jpg", "png", "svg");
@@ -29,11 +30,11 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        for (int i = 0; i < 10; i++) {
-            var employee = new Employee("emp-" + i, null, LocalDate.now());
-
-            retryEmployeeProducer.sendMessage(employee);
-        }
+//        for (int i = 0; i < 10; i++) {
+//            var employee = new Employee("emp-" + i, null, LocalDate.now());
+//
+//            retryEmployeeProducer.sendMessage(employee);
+//        }
     }
 
 //    Producer with retry mechanism
