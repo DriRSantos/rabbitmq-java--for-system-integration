@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class RabbitmqQueue {
 
     private Long messages;
-    private String names;
+    private String name;
 
     public Long getMessages() {
         return messages;
@@ -16,19 +16,19 @@ public class RabbitmqQueue {
         this.messages = messages;
     }
 
-    public String getNames() {
-        return names;
+    public String getName() {
+        return name;
     }
 
-    public void setNames(String names) {
-        this.names = names;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "RabbitmqQueue{" +
                 "messages=" + messages +
-                ", names='" + names + '\'' +
+                ", names='" + name + '\'' +
                 '}';
     }
 

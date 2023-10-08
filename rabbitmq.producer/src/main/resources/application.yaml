@@ -4,6 +4,10 @@ loggin:
 
 spring:
   rabbitmq:
-    addresses: localhost:5672
-    username: guest
-    password: guest
+#    addresses: localhost:5672
+#    username: guest
+#    password: guest
+    addresses: jackal-01.rmq.cloudamqp.com
+    username: qfdacbvw
+    password: CHANGE PASSWORD
+    virtual-host: qfdacbvw

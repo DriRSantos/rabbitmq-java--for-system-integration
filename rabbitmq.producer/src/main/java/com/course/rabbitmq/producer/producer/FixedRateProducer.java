@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-//@Service
+@Service
 public class FixedRateProducer {
 
-    private static final Logger log = LoggerFactory.getLogger(FixedRateProducer.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FixedRateProducer.class);
     @Autowired
     public RabbitTemplate rabbitTemplate;
     private Integer i = 0;
@@ -18,7 +18,7 @@ public class FixedRateProducer {
     @Scheduled(fixedRate = 500)
     public void sendMessageToRabbit() {
         i++;
-//        log.info("i is { } = " + i);
+        LOG.info("i is { } = " + i);
         rabbitTemplate.convertAndSend("course.fixedrate", "Fieed rate" + i);
     }
 }
