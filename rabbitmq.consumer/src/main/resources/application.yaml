@@ -4,13 +4,19 @@ loggin:
 
 spring:
   rabbitmq:
-#    addresses: localhost:5672
-#    username: guest
-#    password: guest
-    addresses: jackal-01.rmq.cloudamqp.com
-    username: qfdacbvw
-    password: CHANGE PASSWORD
-    virtual-host: qfdacbvw
+    addresses: localhost:5672
+    username: guest
+    password: guest
+#    addresses: jackal-01.rmq.cloudamqp.com
+#    username: qfdacbvw
+#    password: ALTERASENHA
+#    virtual-host: qfdacbvw
     listener:
       simple:
-        acknowledge-mode: manual
+        acknowledge-mode: auto
+        retry:
+          enabled: true
+          initial-interval: 3s
+          max-interval: 10s
+          max-attempts: 5
+          multiplier: 2
