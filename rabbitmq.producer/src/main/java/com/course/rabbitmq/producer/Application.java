@@ -4,6 +4,7 @@ import com.course.rabbitmq.producer.entity.Employee;
 import com.course.rabbitmq.producer.entity.Picture;
 import com.course.rabbitmq.producer.producer.RetryEmployeeProducer;
 import com.course.rabbitmq.producer.producer.RetryPictureProducer;
+import com.course.rabbitmq.producer.producer.SpringEmployeeProducer;
 import com.course.rabbitmq.producer.producer.SpringPictureProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -20,28 +21,39 @@ import java.util.concurrent.ThreadLocalRandom;
 //@EnableScheduling
 public class Application implements CommandLineRunner {
 
-    @Autowired
-    private SpringPictureProducer springPictureProducer;
-
-    private static final List<String> SOURCES = List.of("mobile", "web");
-    private static final List<String> TYPES = List.of("jpg", "png", "svg");
-
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
+    @Autowired
+    private SpringEmployeeProducer springEmployeeProducer;
+
+    // SpringPictureProducer
+//    private static final List<String> SOURCES = List.of("mobile", "web");
+//    private static final List<String> TYPES = List.of("jpg", "png", "svg");
+
     @Override
     public void run(String... args) throws Exception {
         for (int i = 0; i < 1; i++) {
-            Picture picture = new Picture();
-            picture.setName("Test spring " + i + LocalTime.now());
-            picture.setSize(ThreadLocalRandom.current().nextLong(9001, 10000));
-            picture.setSource(SOURCES.get(i % SOURCES.size()));
-            picture.setType(TYPES.get(i % TYPES.size()));
-
-            springPictureProducer.sendMessage(picture);
+            var employee = new Employee("emp" + i
+                    , "", LocalDate.of(1990,12, i + 1));
+            springEmployeeProducer.sendMessage(employee);
         }
     }
+
+    // SpringPictureProducer
+//    @Override
+//    public void run(String... args) throws Exception {
+//        for (int i = 0; i < 1; i++) {
+//            Picture picture = new Picture();
+//            picture.setName("Test spring " + i + LocalTime.now());
+//            picture.setSize(ThreadLocalRandom.current().nextLong(9001, 10000));
+//            picture.setSource(SOURCES.get(i % SOURCES.size()));
+//            picture.setType(TYPES.get(i % TYPES.size()));
+//
+//            springPictureProducer.sendMessage(picture);
+//        }
+//    }
 
 //    Producer with retry mechanism
 //    @Override
