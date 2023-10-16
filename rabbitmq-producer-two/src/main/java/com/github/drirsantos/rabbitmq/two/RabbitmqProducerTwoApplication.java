@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalTime;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 public class RabbitmqProducerTwoApplication implements CommandLineRunner {
@@ -21,7 +22,10 @@ public class RabbitmqProducerTwoApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		var dummyMessage = new DummyMessage("Now is " + LocalTime.now(), 1);
-		dummyProducer.sendDummy(dummyMessage);
+		for (int i=0; i<10_000; i++) {
+			var dummyMessage = new DummyMessage("Now is " + LocalTime.now(), 1);
+			dummyProducer.sendDummy(dummyMessage);
+			TimeUnit.SECONDS.sleep(1);
+		}
 	}
 }
